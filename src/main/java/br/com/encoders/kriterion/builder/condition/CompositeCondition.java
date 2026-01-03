@@ -16,7 +16,7 @@ public class CompositeCondition extends Condition {
 
     public CompositeCondition and(String column, Object value) {
         this.operators.add("AND");
-        this.conditions.add(new Clause(column, "=", value));
+        this.conditions.add(new Clause(column, Operator.EQUAL, ClauseValue.of(value)));
         return this;
     }
 
@@ -28,7 +28,7 @@ public class CompositeCondition extends Condition {
 
     public CompositeCondition or(String column, Object value) {
         this.operators.add("OR");
-        this.conditions.add(new Clause(column, "=", value));
+        this.conditions.add(new Clause(column, Operator.EQUAL, ClauseValue.of(value)));
         return this;
     }
 

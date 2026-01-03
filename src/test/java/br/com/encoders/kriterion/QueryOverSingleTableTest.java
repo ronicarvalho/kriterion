@@ -149,4 +149,32 @@ public class QueryOverSingleTableTest {
 
         assertEquals("SELECT * FROM Customers WHERE age = 18 AND kind = 'RED'", statement.sql());
     }
+
+    @Test
+    void statement_result_select_all_where_eq_value_or_query() {
+        var statement = QueryOver.builder()
+                .selectAll()
+                .from("Customers")
+                .where(
+                        Conditioner.eq("age", 18)
+                                .or("age", 25)
+                )
+                .build();
+
+        assertEquals("SELECT * FROM Customers WHERE age = 18 OR age = 25", statement.sql());
+    }
+
+    @Test
+    void statement_result_select_all_where_eq_value_or_between_query() {
+        var statement = QueryOver.builder()
+                .selectAll()
+                .from("Customers")
+                .where(
+                        Conditioner.eq("age", 18)
+                                .or(Conditioner.between("rank", 10, 20))
+                )
+                .build();
+
+        assertEquals("SELECT * FROM Customers WHERE age = 18 OR rank BETWEEN 10 AND 20", statement.sql());
+    }
 }
