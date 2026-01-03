@@ -24,7 +24,7 @@ public class Conditioner {
         return new CompositeCondition(new Clause(column, "<=", value));
     }
 
-    public static CompositeCondition notEq(String column, Object value) {
+    public static CompositeCondition neq(String column, Object value) {
         return new CompositeCondition(new Clause(column, "<>", value));
     }
 

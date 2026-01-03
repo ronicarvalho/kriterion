@@ -124,6 +124,19 @@ public class QueryOverSingleTableTest {
     }
 
     @Test
+    void statement_result_select_all_where_neq_value_query() {
+        var statement = QueryOver.builder()
+                .selectAll()
+                .from("Customers")
+                .where(
+                        Conditioner.neq("age", 18)
+                )
+                .build();
+
+        assertEquals("SELECT * FROM Customers WHERE age <> 18", statement.sql());
+    }
+
+    @Test
     void statement_result_select_all_where_eq_value_and_query() {
         var statement = QueryOver.builder()
                 .selectAll()
